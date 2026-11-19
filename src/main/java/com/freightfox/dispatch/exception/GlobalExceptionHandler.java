@@ -1,4 +1,5 @@
 package com.freightfox.dispatch.exception;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import org.slf4j.Logger;
@@ -54,6 +55,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiError> handleNotReady(DispatchNotReadyException ex) {
         return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
                 .body(ApiError.of(ex.getMessage(), List.of()));
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ApiError> handleNotFound(NoResourceFoundException ex) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ApiError.of("Resource not found: " + ex.getResourcePath(), List.of()));
     }
 
     @ExceptionHandler(Exception.class)
