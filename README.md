@@ -1,0 +1,2 @@
+## Testing with Postman
+Import `postman/dispatch-load-balancer.postman_collection.json` into Postman and run it with the Collection Runner. The API is tested through Postman; Swagger UI is provided only as API documentation.
